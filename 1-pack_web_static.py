@@ -16,6 +16,7 @@ filename = "web_static_{}{}{}{}{}{}".format(year, month,
                                             day, hour, minute, second)
 command = "tar -cvzf versions/{}.tgz web_static".format(filename)
 
+
 def do_pack():
     """creates an archive"""
     local("mkdir -p versions")
