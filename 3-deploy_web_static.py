@@ -5,8 +5,6 @@ from fabric.api import local, env
 from datetime import datetime
 from pathlib import Path
 from fabric.operations import run, put
-import os
-from fabric.contrib import files
 
 time = datetime.now()
 year = time.strftime("%Y")
@@ -46,24 +44,19 @@ def do_deploy(archive_path):
         put(archive_path, '/tmp/')
         # Makes directory
         if not files.exists('/data/web_static/releases/{}'.format(name_no_ext)):
-            run('sudo mkdir -p /data/web_static/releases/{}'.\
-                format(name_no_ext))
+            run('sudo mkdir -p /data/web_static/releases/{}'.format(name_no_ext))
         # Uncompresses archive
-        run('sudo tar -xvf /tmp/{}.tgz -C /data/web_static/releases/{}'.\
-            format(name_no_ext, name_no_ext))
+        run('sudo tar -xvf /tmp/{}.tgz -C /data/web_static/releases/{}'.format(name_no_ext, name_no_ext))
         # remove tgz file from temp
         run('sudo rm /tmp/{}.tgz'.format(name_no_ext))
         # move file to proper location
-        run('sudo mv /data/web_static/releases/{}/web_static/* '\
-            '/data/web_static/releases/{}/'.format(name_no_ext, name_no_ext))
-        run('sudo rm -rf /data/web_static/releases/{}/web_static'.\
-            format(name_no_ext))
+        run('sudo mv /data/web_static/releases/{}/web_static/* /data/web_static/releases/{}/'.format(name_no_ext, name_no_ext))
+        run('sudo rm -rf /data/web_static/releases/{}/web_static'.format(name_no_ext))
         # Remove old symlink
         if files.exists('/data/web_static/current'):
             run('sudo rm -rf /data/web_static/current')
         # Create new symlink
-        run('sudo ln -s /data/web_static/releases/{} /data/web_static/current'.\
-            format(name_no_ext))
+        run('sudo ln -s /data/web_static/releases/{} /data/web_static/current'.format(name_no_ext))
         print("New version deployed!")
         return True
     except Exception:
@@ -75,3 +68,21 @@ def deploy():
     if filepath == False:
         return False
     return do_deploy(filepath)
+=======
+    #try: 
+    put(archive_path, '/tmp/')
+    input("1")
+    run('sudo mkdir /data/web_static/releases/{}'.format(filename))
+    input("2")
+    run('sudo tar -xvf versions/{}.tgz -C /data/web_static/releases/{}'.format(filename, filename))
+    input("3")
+    run('sudo rm versions/{}.tgz'.format(filename))
+    input("4")
+    run('sudo rm /data/web_static/current')
+    run('sudo ln -s /data/web_static/releases/{} /data/web_static/current'.format(filename))
+    print("New version deployed!")
+    return True
+#    except Exception:
+#        print("exception raised")
+#        return False
+>>>>>>> parent of 127b0b8... Initial commit
