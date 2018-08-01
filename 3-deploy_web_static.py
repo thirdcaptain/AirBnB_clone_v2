@@ -46,19 +46,24 @@ def do_deploy(archive_path):
         put(archive_path, '/tmp/')
         # Makes directory
         if not files.exists('/data/web_static/releases/{}'.format(name_no_ext)):
-            run('sudo mkdir -p /data/web_static/releases/{}'.format(name_no_ext))
+            run('sudo mkdir -p /data/web_static/releases/{}'.\
+                format(name_no_ext))
         # Uncompresses archive
-        run('sudo tar -xvf /tmp/{}.tgz -C /data/web_static/releases/{}'.format(name_no_ext, name_no_ext))
+        run('sudo tar -xvf /tmp/{}.tgz -C /data/web_static/releases/{}'.\
+            format(name_no_ext, name_no_ext))
         # remove tgz file from temp
         run('sudo rm /tmp/{}.tgz'.format(name_no_ext))
         # move file to proper location
-        run('sudo mv /data/web_static/releases/{}/web_static/* /data/web_static/releases/{}/'.format(name_no_ext, name_no_ext))
-        run('sudo rm -rf /data/web_static/releases/{}/web_static'.format(name_no_ext))
+        run('sudo mv /data/web_static/releases/{}/web_static/* '\
+            '/data/web_static/releases/{}/'.format(name_no_ext, name_no_ext))
+        run('sudo rm -rf /data/web_static/releases/{}/web_static'.\
+            format(name_no_ext))
         # Remove old symlink
         if files.exists('/data/web_static/current'):
             run('sudo rm -rf /data/web_static/current')
         # Create new symlink
-        run('sudo ln -s /data/web_static/releases/{} /data/web_static/current'.format(name_no_ext))
+        run('sudo ln -s /data/web_static/releases/{} /data/web_static/current'.\
+            format(name_no_ext))
         print("New version deployed!")
         return True
     except Exception:
