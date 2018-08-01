@@ -69,6 +69,7 @@ def do_deploy(archive_path):
     except Exception:
         return False
 
+
 def deploy():
     filepath = do_pack()
     if filepath == False:
