@@ -66,7 +66,7 @@ def do_deploy(archive_path):
 
 
 def deploy():
-    """deploys static"""
+    """calls do_path and deploys to web server"""
     filepath = do_pack()
     if filepath == False:
         return False
