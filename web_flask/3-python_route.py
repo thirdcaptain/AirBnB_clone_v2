@@ -24,8 +24,8 @@ def c_text(text):
     return "C %s" % text
 
 
-@app.route("/python", defaults={"text":"is cool"})
-@app.route("/python/", defaults={"text":"is cool"})
+@app.route("/python", defaults={"text": "is cool"})
+@app.route("/python/", defaults={"text": "is cool"})
 @app.route("/python/<text>")
 def python_text(text):
     """shows python and text"""
