@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""Flask web app that prints Hello HBNB!"""
+"""Flask web app"""
 
 from flask import Flask
 app = Flask(__name__)
@@ -31,6 +31,12 @@ def python_text(text):
     """shows python and text"""
     text = text.replace("_", " ")
     return "Python %s" % text
+
+
+@app.route("/number/<int:n>", strict_slashes=False)
+def number_n(n):
+    """shows number and n"""
+    return "%s is a number" % n
 
 if __name__ == '__main__':
     app.run()
