@@ -18,9 +18,9 @@ class FileStorage:
             Return the dictionary
         '''
         obj = {}
-        if isinstance(cls, str) == False:
-            cls = cls.__name__
         if cls:
+            if isinstance(cls, str) == False:
+                cls = cls.__name__
             for key, value in self.__objects.items():
                 if cls == key.split('.')[0]:
                     obj[key] = value
