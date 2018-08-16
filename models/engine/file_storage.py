@@ -17,7 +17,16 @@ class FileStorage:
         '''
             Return the dictionary
         '''
-        return self.__objects
+        obj = {}
+        if isinstance(cls, str) == False:
+            cls = cls.__name__
+        if cls:
+            for key, value in self.__objects.items():
+                if cls == key.split('.')[0]:
+                    obj[key] = value
+            return obj
+        else:
+            return self.__objects
 
     def new(self, obj):
         '''
@@ -64,3 +73,8 @@ class FileStorage:
         key = str(obj.__class__.__name__) + "." + str(obj.id)
         del self.__objects[key]
         self.save()
+
+    def close(self):
+        """deserializes JSON file to objects"""
+        self.reload()
+    

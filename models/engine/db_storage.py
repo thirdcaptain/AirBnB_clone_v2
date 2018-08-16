@@ -41,13 +41,13 @@ class DBStorage:
         """
         obj = {}
         if cls:
-            for value in self.__session.query(cls):
-                key = str(value.__class__.__name__) + "." + str(value.id)
+            for value in self.__session.query(eval(cls)):
+                key = value.__class__.__name__ + "." + value.id
                 obj[key] = value
         else:
             for one_class in classes:
                 for value in self.__session.query(one_class):
-                    key = str(value.__class__.__name__) + "." + str(value.id)
+                    key = value.__class__.__name__ + "." + value.id
                     obj[key] = value
         return obj
 
@@ -75,3 +75,9 @@ class DBStorage:
         Base.metadata.create_all(self.__engine)
         Session = sessionmaker(bind=self.__engine, expire_on_commit=False)
         self.__session = scoped_session(Session)
+
+    def close(self):
+        """
+        removes private session attribute
+        """
+        self.__session.remove()
