@@ -25,7 +25,7 @@ class FileStorage:
         print()
         print()
         if cls:
-            if not isinstance(cls, str):
+            if isinstance(cls, str) is False:
                 cls = cls.__name__
             for key, value in self.__objects.items():
                 if cls == key.split('.')[0]:
