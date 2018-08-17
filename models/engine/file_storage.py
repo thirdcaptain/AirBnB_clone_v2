@@ -18,12 +18,6 @@ class FileStorage:
             Return the dictionary
         '''
         obj = {}
-        print("Print self.objects")
-        print()
-        print()
-        print(self.__objects)
-        print()
-        print()
         if cls:
             if isinstance(cls, str) is False:
                 cls = cls.__name__
