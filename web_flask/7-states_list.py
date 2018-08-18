@@ -60,6 +60,7 @@ def number_odd_or_even(n):
 
 @app.route("/states_list")
 def states_list():
+    """prints states"""
     all_states_list = []
     all_states_dict = storage.all("State")
     for key, value in all_states_dict.items():
