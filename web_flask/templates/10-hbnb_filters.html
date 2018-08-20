@@ -26,7 +26,9 @@
                         <li>
                             <ul class="popover_list">
 			            {% for city in city_list|sort(attribute='name') %}
+				        {% if city.state_id == state.id %}
                                 <li>{{ city.name }}</li>
+				        {% endif %}
 				{% endfor %}
                             </ul>
                         </li>
